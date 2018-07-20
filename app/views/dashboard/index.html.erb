@@ -1,0 +1,43 @@
+<div class="container" style="margin-top: 95px">
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <%= render :partial => "layouts/sidebar" %>
+    </div>
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title has-text-grey">Uang Masuk Bulan Ini</p>
+        </header>
+      <div class="card-content">
+        <div class="content">
+<% if @data_uang_masuk.present? %>
+  <% c = @data_uang_masuk.map {|m| m.jumlah.to_i} %>
+  <%= number_to_currency(c.inject(0) {|sum,x| sum + x}, unit: "Rp. ", separator: ",", delimiter: ".") %>
+ <% else %>
+ 0
+<% end %>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title has-text-grey">Uang Keluar Bulan Ini</p>
+        </header>
+      <div class="card-content">
+        <div class="content">
+<% if @data_uang_keluar.present? %>
+<% c = @data_uang_keluar.map {|m| m.jumlah.to_i} %>
+<%= number_to_currency(c.inject(0) {|sum,x| sum + x}, unit: "Rp. ", separator: ",", delimiter: ".") %>
+<% else %>
+0
+<% end %>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

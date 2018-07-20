@@ -1,0 +1,14 @@
+@import "bulma";
+
+
+.notification:not(:last-child) {
+  margin-bottom: 0;
+}
+
+table.table.is-bordered {
+    margin-top: 23px;
+}
+
+.has-text-right {
+    padding: 10px;
+}

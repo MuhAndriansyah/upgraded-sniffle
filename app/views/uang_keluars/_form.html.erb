@@ -1,0 +1,49 @@
+<div class="container" style="margin-top: 95px">
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <%= render :partial => "layouts/sidebar" %>
+    </div>
+
+      <%= form_with(model: @uang_keluar, local: true) do |form| %>
+        <% if @uang_keluar.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(uang_keluar.errors.count, "error") %>prohibited this uang_masuk from being saved:</h2>
+
+            <ul>
+              <%= uang_keluar.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <div class="control">
+            <%= form.label :jumlah %>
+            <%= form.text_field :jumlah, id: :uang_keluar_jumlah, class:'input' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= form.label :tanggal %>
+            <%= form.text_field :tanggal, id: :uang_keluar_tanggal, type:'date', class:'input' %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= form.label :keterangan %>
+            <%= form.text_area :keterangan, id: :uang_keluar_keterangan, class:'input' %>
+          </div>
+        </div>
+
+          <div class="actions">
+            <%= form.submit %>
+          </div>
+<%= link_to 'Back', uang_keluars_path %>
+
+      <% end %>
+
+    </div>
+  </div>

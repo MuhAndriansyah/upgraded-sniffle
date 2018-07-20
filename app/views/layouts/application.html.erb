@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CrudMoney</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bulma-calendar@4.0.1/dist/js/bulma-calendar.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-calendar@4.0.1/dist/css/bulma-calendar.min.css">
+  </head>
+
+  <body>
+
+  <% if flash[:notice] %>
+    <div class="notification is-success global-notification">
+      <p class="notice"><%= notice %></p>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+  <div class="notification is-danger global-notification">
+    <p class="alert"><%= alert %></p>
+  </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <%= link_to authenticated_root_path, class:"navbar-item" do %>
+                  <h1 class="title is-5 has-text-grey">App-Money</h3>
+                <% end %>
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+
+                    <%= link_to edit_user_registration_path, class: "navbar-item" do%>
+                            <span class="icon"><i class="fa fa-user"></i></span>
+                    <% end %>
+
+                    <%= link_to destroy_user_session_path, method: :delete, class:"navbar-item" do %>
+                    <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </nav>
+<% end %>
+
+    <%= yield %>
+<script type="text/javascript">
+$(function () {
+var datePickers = bulmaCalendar.attach('[type="date"]', {
+  overlay: true,
+});
+// datePickers now contains an Array of all datePicker instances
+});
+
+</script>
+
+  </body>
+</html>

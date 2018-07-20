@@ -1,0 +1,81 @@
+<div class="container" style="margin-top: 95px">
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <%= render :partial => "layouts/sidebar" %>
+    </div>
+
+    <div class="column">
+      <div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Laporan Uang Keluar
+    </p>
+
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <div class="field is-horizontal">
+          <%= form_tag(laporan_keluar_url, method: :get) do%>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded has-icons-left">
+        <%= text_field_tag :dari_tanggal, params[:dari_tanggal], type:'date' , required: "required", class:'input' %>
+        <span class="icon is-small is-left">
+          <i class="far fa-calendar-alt"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field">
+      <p class="control is-expanded has-icons-left has-icons-right">
+        <%= text_field_tag :sampai_tanggal, params[:sampai_tanggal], type:'date' , required: "required", class:'input' %>
+        <span class="icon is-small is-left">
+          <i class="far fa-calendar-alt"></i>
+        </span>
+      </p>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          <%= submit_tag 'Filter Data', class:'button is-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<table class="table is-bordered">
+  <thead>
+    <tr>
+ <th>JUMLAH UANG</th>
+ <th>TANGGAL</th>
+ <th>KETERANGAN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @data_uang_keluar == nil %>
+    <% else %>
+    <% @data_uang_keluar.each do |data| %>
+      <tr>
+        <td><%= data.jumlah %></td>
+        <td><%= data.tanggal %></td>
+        <td><%= data.keterangan%></td>
+      </tr>
+      <% end %>
+    <% end %>
+</tbody>
+</table>
+    </div>
+  </div>
+
+  <div class="has-text-right">
+  <% if @data_uang_keluar.present? %>
+    <span style="font-size: 17px;font-weight: 500;"><i class="fa fa-credit-card"></i> TOTAL UANG MASUK :
+    <% c = @data_uang_keluar.map { |m| m.jumlah.to_i} %>
+    <%= number_to_currency(c.inject(0) {|sum,x| sum + x}, unit: "Rp. ", separator: ",", delimiter: ".") %>
+    </span>
+  <% end %>
+</div>
+</div>
+    </div>
+  </div>
+</div>
